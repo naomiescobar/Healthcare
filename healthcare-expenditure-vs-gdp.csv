@@ -1,4 +1,4 @@
-Entity,Year,"Current health expenditure per capita, PPP (current international $)","GDP per capita, PPP (constant 2017 international $)",Population (historical estimates),Continent
+Entity,Year,Health expenditure per capita,GDP per capita,Population,Continent
 Abkhazia,2015,,,,Asia
 Afghanistan,2002,81.271034,1280.4631,21000258,
 Afghanistan,2003,82.45785,1292.3335,22645136,
