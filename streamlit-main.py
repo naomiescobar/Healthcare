@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
-import plotly.express as px
-
+import matplotlib.pyplot as plt
 
 # graph 1
 url = "https://raw.githubusercontent.com/naomiescobar/Healthcare/streamlit_main.py/healthcare-expenditure%20per%20capita%20by%20State.csv"
@@ -18,7 +17,7 @@ filtered_data = data[data['State'].isin(selected_states)]
 if len(selected_states) > 0:
     st.title("Healthcare Expenditure per Capita Comparison")
 
-    fig = px.bar(filtered_data, x='State', y='Health Spending per Capita', color='State', title='Healthcare Expenditure per Capita by State')
+    fig = plt.bar(filtered_data, x='State', y='Health Spending per Capita', color='State', title='Healthcare Expenditure per Capita by State')
     
     # update
     fig.update_layout(xaxis_title='State', yaxis_title='Healthcare Expenditure per Capita')
