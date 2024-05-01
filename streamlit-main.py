@@ -1,12 +1,14 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import plotly.express as px
+
 
 # graph 1
 url = "https://raw.githubusercontent.com/naomiescobar/Healthcare/streamlit_main.py/healthcare-expenditure%20per%20capita%20by%20State.csv"
 data = pd.read_csv(url)
 
-st.sidebar.title("Health Expenditure per capita (by State)")
+st.sidebar.title("Select States")
 selected_states = st.sidebar.multiselect("Choose states", data['State'].unique())
 
 # menu to select states
@@ -23,6 +25,8 @@ if len(selected_states) > 0:
 
     # show the chart
     st.plotly_chart(fig)
+
+
 
     
 
@@ -70,9 +74,6 @@ st.sidebar.title("Health Expenditure GPD (Private vs. Public)")
 option_private = st.sidebar.checkbox("US Health Expenditure, Private")
 option_public = st.sidebar.checkbox("US Health Expenditure, Public")
 
-# line chart
-st.title("Health Expenditure Comparison")
-
 # Filter data based on selected options
 selected_data = []
 if option_private:
@@ -92,5 +93,4 @@ if selected_data:
         height=500
     ).interactive()
     st.altair_chart(chart, use_container_width=True)
-else:
-    st.warning("Please select at least one data option.")
+
