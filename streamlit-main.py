@@ -6,9 +6,16 @@ import altair as alt
 url_graph1 = "https://raw.githubusercontent.com/naomiescobar/Healthcare/streamlit_main.py/healthcare-expenditure%20per%20capita%20by%20State.csv"
 data_graph1 = pd.read_csv(url_graph1)
 
+'''This indicator calculates the average expenditure on health per person in comparable currency including the purchasing power of national currencies. It contributes to understand the health expenditure relative to the population size facilitating national comparison.
+'''
+
+
 # graph 2
 url_graph2 = "https://storage.googleapis.com/scsu-data-science/health-expenditure-2000-2020.csv"
 data_graph2 = pd.read_csv(url_graph2)
+
+''''''
+
 
 # graph 3
 url_graph3 = "https://raw.githubusercontent.com/naomiescobar/Healthcare/main/us-healthcare-expenditure%20private%20vs.%20public%20(GDP).csv"
