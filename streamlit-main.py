@@ -2,34 +2,29 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
-# graph 1
+# Load data for graph 1
 url_graph1 = "https://raw.githubusercontent.com/naomiescobar/Healthcare/streamlit_main.py/healthcare-expenditure%20per%20capita%20by%20State.csv"
 data_graph1 = pd.read_csv(url_graph1)
 
-'''This indicator calculates the average expenditure on health per person in comparable currency including the purchasing power of national currencies. It contributes to understand the health expenditure relative to the population size facilitating national comparison.
-'''
-
-
-# graph 2
+# Load data for graph 2
 url_graph2 = "https://storage.googleapis.com/scsu-data-science/health-expenditure-2000-2020.csv"
 data_graph2 = pd.read_csv(url_graph2)
 
-''''''
-
-
-# graph 3
+# Load data for graph 3
 url_graph3 = "https://raw.githubusercontent.com/naomiescobar/Healthcare/main/us-healthcare-expenditure%20private%20vs.%20public%20(GDP).csv"
 us_data = pd.read_csv(url_graph3)
 
-# sidebar 
-page = st.sidebar.radio("Select Page", ["Healthcare Expenditure per Capita Comparison", "Health Expenditure Comparison", "Health Expenditure GPD (Private vs. Public"])
+# Sidebar navigation
+page = st.sidebar.radio("Select Page", ["Graph 1", "Graph 2", "Graph 3"])
 
-if page == "Healthcare Expenditure per Capita Comparison":
+# Display selected graph
+if page == "Graph 1":
     st.title("Graph 1: Healthcare Expenditure per Capita Comparison")
+    st.write("You can choose any state and compare the Health Expenditures. This indicator calculates the average expenditure on health per person in comparable currency including the purchasing power of national currencies. It contributes to understanding the health expenditure relative to the population size facilitating national comparison.")
     
     selected_states = st.multiselect("Choose states", data_graph1['State'].unique())
 
-    # states menu
+    # menu to select states
     filtered_data_graph1 = data_graph1[data_graph1['State'].isin(selected_states)]
 
     # bar chart
@@ -47,16 +42,19 @@ if page == "Healthcare Expenditure per Capita Comparison":
     else:
         st.warning("Please select at least one state.")
 
-elif page == "Health Expenditure Comparison":
+elif page == "Graph 2":
     st.title("Graph 2: Health Expenditure Comparison")
+    st.write("Health expenditure per capita is the amount that each country spends on health, for both individual and collective services, and how this changes over time can be the result of a wide array of social and economic factors, as well as the financing and organisational structures of a country's health system. You can choose any country and compare the Health Expenditures and compare them in the graph. Health expenditure data reveal strengths, weaknesses, and areas needing investment like health facilities, information systems, and human resources.")
     
     selected_countries = st.multiselect("Choose countries", data_graph2['Country Name'].unique())
 
-    # countries menu
+    # menu to select countries
     filtered_data_graph2 = data_graph2[data_graph2['Country Name'].isin(selected_countries)]
 
-    # columns with years
+    # columns representing the years
     year_columns = [str(year) for year in range(2000, 2024)]
+
+    # melt the data to have 'Year' as a variable
     melted_data_graph2 = filtered_data_graph2.melt(id_vars=['Country Name'], value_vars=year_columns, var_name='Year', value_name='Health Expenditure (per capita)')
 
     # Convert 'Year' to int
@@ -77,13 +75,16 @@ elif page == "Health Expenditure Comparison":
     else:
         st.warning("Please select at least one country.")
 
-elif page == "Health Expenditure GPD (Private vs. Public":
+elif page == "Graph 3":
     st.title("Graph 3: Health Expenditure GPD (Private vs. Public)")
+    st.write("This indicator is defined as the level of total expenditure on health expressed as a percentage of GDP, where GDP is the value of all final goods and services produced within a nation in a given year.")
+    st.write("Government insurance programs, such as Medicare and Medicaid, made up 45 percent, or $1.9 trillion, of national healthcare spending. Private insurance programs, including employer-provided health insurance as well as plans purchased through the Affordable Care Act, accounted for 30 percent, or about $1.3 trillion.")
+    st.write("More than 17 percent of the U.S. Gross Domestic Product is spent on health care—in many cases, for conditions that could be prevented or better managed with public health interventions. Yet only 3 percent of the government's health budget is spent on public health measures.")
 
     option_private = st.checkbox("US Health Expenditure, Private")
     option_public = st.checkbox("US Health Expenditure, Public")
 
-    # filter the data based on selected options
+    # Filter data based on selected options
     selected_data = []
     if option_private:
         selected_data.append('US Health Expenditure, Private (US Census and WDI (2013))')
